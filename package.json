@@ -1,0 +1,22 @@
+{
+  "name": "opensbx",
+  "scripts": {
+    "dev": "bun run turbo dev",
+    "format": "biome format --write",
+    "lint": "biome check --fix"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "turbo": "^2.8.20"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "packageManager": "bun@1.3.4",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
