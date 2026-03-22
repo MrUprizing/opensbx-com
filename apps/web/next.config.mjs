@@ -6,6 +6,10 @@ const withMDX = createMDX();
 const config = {
   serverExternalPackages: ['@takumi-rs/image-response'],
   reactStrictMode: true,
+  experimental: {
+    turbopackFileSystemCacheForDev: true,
+    turbopackFileSystemCacheForBuild: true,
+  },
   async rewrites() {
     return [
       {
