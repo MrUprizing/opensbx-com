@@ -1,19 +1,21 @@
 import { ChevronRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import {
+  IconAstro,
+  IconBun,
+  IconClaude,
+  IconClaudeCode,
+  IconDocker,
+  IconGo,
+  IconNextjs,
+  IconNodeJs,
+  IconPython,
+} from "@/assets";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Claude } from "@/components/ui/svgs/claude";
-import { ClerkIconLight as Clerk } from "@/components/ui/svgs/clerk";
-import { Figma } from "@/components/ui/svgs/figma";
-import { Firebase } from "@/components/ui/svgs/firebase";
-import { Linear } from "@/components/ui/svgs/linear";
-import { Slack } from "@/components/ui/svgs/slack";
-import { Supabase } from "@/components/ui/svgs/supabase";
-import { Twilio } from "@/components/ui/svgs/twilio";
-import { Vercel } from "@/components/ui/svgs/vercel";
+import Features from "./features-1";
 import { HeroHeader } from "./header";
+import { Spotlight } from "./ui/spotlight";
 
 export default function HeroSection() {
   return (
@@ -22,104 +24,96 @@ export default function HeroSection() {
       <main className="overflow-hidden">
         <section className="bg-background">
           <div className="relative pb-32 pt-44">
-            <div className="mask-radial-from-45% mask-radial-to-75% mask-radial-at-top mask-radial-[75%_100%] md:aspect-9/4 absolute inset-0 aspect-square opacity-65 dark:opacity-5">
-              <Image
-                src="/bg.avif"
-                alt="hero background"
-                width={2102}
-                height={1694}
-                className="h-full w-full object-cover object-top"
-              />
-            </div>
+            <Spotlight />
             <div className="relative z-10 mx-auto w-full max-w-5xl px-6">
               <div className="mx-auto mb-16 max-w-xl lg:mb-24">
                 <div className="**:fill-foreground grid scale-95 grid-cols-3 gap-12">
                   <div className="ml-auto blur-[2px]">
                     <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                      <Supabase className="size-4" />
+                      <IconBun className="size-4" />
                       <span className="text-nowrap font-medium max-sm:text-xs">
-                        Supabase
+                        Bun
                       </span>
                     </Card>
                   </div>
                   <div className="ml-auto">
                     <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                      <Slack className="size-4" />
+                      <IconNodeJs className="size-4" />
                       <span className="text-nowrap font-medium max-sm:text-xs">
-                        Slack
+                        NodeJs
                       </span>
                     </Card>
                   </div>
                   <div className="ml-auto blur-[2px]">
                     <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                      <Figma className="size-4" />
+                      <IconAstro className="size-4" />
                       <span className="text-nowrap font-medium max-sm:text-xs">
-                        Figma
+                        Astro
                       </span>
                     </Card>
                   </div>
                   <div className="mr-auto">
                     <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                      <Vercel className="size-4" />
+                      <IconClaudeCode className="size-4" />
                       <span className="text-nowrap font-medium max-sm:text-xs">
-                        Vercel
+                        Claude Code
                       </span>
                     </Card>
                   </div>
                   <div className="blur-[2px]">
                     <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                      <Firebase className="size-3 sm:size-4" />
+                      <IconPython className="size-3 sm:size-4" />
                       <span className="text-nowrap font-medium max-sm:text-xs">
-                        Firebase
+                        Python
                       </span>
                     </Card>
                   </div>
                   <div>
-                    <Card className="shadow-foreground/10 mx-a flex h-10 h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                      <Linear className="size-3 sm:size-4" />
+                    <Card className="shadow-foreground/10 mx-a flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
+                      <IconNextjs className="size-3 sm:size-4" />
                       <span className="text-nowrap font-medium max-sm:text-xs">
-                        Linear
+                        Next.js
                       </span>
                     </Card>
                   </div>
                   <div className="ml-auto blur-[2px]">
                     <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                      <Twilio className="size-3 sm:size-4" />
+                      <IconGo className="size-3 sm:size-4" />
                       <span className="text-nowrap font-medium max-sm:text-xs">
-                        Twilio
+                        Go
                       </span>
                     </Card>
                   </div>
                   <div>
                     <Card className="shadow-foreground/10 mx-a flex h-10 h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                      <Claude className="size-3 sm:size-4" />
+                      <IconDocker className="size-3 sm:size-4" />
                       <span className="text-nowrap font-medium max-sm:text-xs">
-                        Claude AI
+                        Docker
                       </span>
                     </Card>
                   </div>
                   <div className="blur-[2px]">
                     <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                      <Clerk className="size-3 sm:size-4" />
+                      <IconClaude className="size-3 sm:size-4" />
                       <span className="text-nowrap font-medium max-sm:text-xs">
-                        Clerk{" "}
+                        Claude
                       </span>
                     </Card>
                   </div>
                 </div>
               </div>
-              <div className="mx-auto max-w-7xl text-center">
-                <h1 className="text-balance font-pixel-circle text-4xl sm:text-7xl">
-                  Ship faster. Integrate smarter.
+              <div className="mx-auto max-w-5xl text-center">
+                <h1 className="text-balance font-pixel-circle font-medium text-5xl sm:text-6xl">
+                  The self-hosted way to run code you did not write.
                 </h1>
                 <p className="text-muted-foreground mt-4 text-balance">
-                  Veil is your all-in-one engine for adding seamless
-                  integrations to your app.
+                  Opensbx is an local-first sandbox runtime for untrusted or
+                  AI-generated code.
                 </p>
 
                 <Button
                   className="mt-6 pr-1.5"
-                  render={<Link href="#link" />}
+                  render={<Link href="/docs" />}
                   nativeButton={false}
                 >
                   <span className="text-nowrap">Start Building</span>
@@ -130,6 +124,7 @@ export default function HeroSection() {
           </div>
         </section>
       </main>
+      <Features />
     </>
   );
 }

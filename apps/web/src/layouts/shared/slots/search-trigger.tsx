@@ -3,45 +3,27 @@ import { useI18n } from "fumadocs-ui/contexts/i18n";
 import { useSearchContext } from "fumadocs-ui/contexts/search";
 import { Search } from "lucide-react";
 import type { ComponentProps } from "react";
-import {
-  type ButtonProps,
-  buttonVariants,
-} from "../../../components/ui/button";
+import { Button } from "../../../components/ui/button";
 import { cn } from "../../../lib/cn";
 
-export interface SearchTriggerProps
-  extends Omit<ComponentProps<"button">, "color">,
-    ButtonProps {
+export interface SearchTriggerProps {
   hideIfDisabled?: boolean;
 }
-
-export function SearchTrigger({
-  hideIfDisabled,
-  size = "icon-sm",
-  color = "ghost",
-  ...props
-}: SearchTriggerProps) {
+export function SearchTrigger({ hideIfDisabled = false }: SearchTriggerProps) {
   const { setOpenSearch, enabled } = useSearchContext();
   if (hideIfDisabled && !enabled) return null;
 
   return (
-    <button
-      type="button"
-      className={cn(
-        buttonVariants({
-          size,
-          color,
-        }),
-        props.className,
-      )}
-      data-search=""
+    <Button
+      variant="ghost"
+      size="icon"
       aria-label="Open Search"
       onClick={() => {
         setOpenSearch(true);
       }}
     >
       <Search />
-    </button>
+    </Button>
   );
 }
 

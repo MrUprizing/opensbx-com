@@ -158,7 +158,7 @@ export function DocsLayout(props: DocsLayoutProps) {
             head: (
               <>
                 {slots.navTitle && (
-                  <slots.navTitle className="inline-flex items-center gap-2.5 text-sm font-semibold" />
+                  <slots.navTitle className="inline-flex items-center gap-2.5 font-semibold font-pixel-grid" />
                 )}
                 {nav.children}
               </>
@@ -174,10 +174,7 @@ export function DocsLayout(props: DocsLayoutProps) {
                   </slots.languageSelect.root>
                 )}
                 {slots.searchTrigger && (
-                  <slots.searchTrigger.sm
-                    hideIfDisabled
-                    className="rounded-lg"
-                  />
+                  <slots.searchTrigger.sm hideIfDisabled />
                 )}
                 {slots.sidebar && (
                   <slots.sidebar.trigger

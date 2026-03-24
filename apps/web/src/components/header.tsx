@@ -37,7 +37,7 @@ export const HeroHeader = () => {
             <div
               className={cn(
                 "flex justify-between gap-6 duration-200 max-lg:w-full",
-                isScrolled && "lg:opacity-0 lg:blur-[4px]",
+                isScrolled && "lg:opacity-0 lg:blur-xs",
               )}
             >
               <div className="hidden size-fit lg:block">
@@ -48,7 +48,7 @@ export const HeroHeader = () => {
                 aria-label="home"
                 className="flex items-center space-x-2 lg:hidden"
               >
-                <Logo />
+                Opensbx
               </Link>
 
               <button
@@ -132,7 +132,7 @@ const FloatingNavPill = ({ isScrolled }: { isScrolled: boolean }) => {
       )}
     >
       <Link href="/" aria-label="home" className="px-3.5">
-        <Logo />
+        <h1 className="font-pixel-circle text-lg font-semibold">Opensbx</h1>
       </Link>
       <AnimatePresence initial={false}>
         {isScrolled && (

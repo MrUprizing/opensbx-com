@@ -182,7 +182,7 @@ function SidebarContent({
           }}
         >
           <motion.aside
-            id="nd-sidebar"
+            // id="nd-sidebar"
             ref={mergeRefs(ref, refProp)}
             className={cn("mx-auto sm:max-w-[400px]", className)}
             onClick={(e) => e.stopPropagation()}
