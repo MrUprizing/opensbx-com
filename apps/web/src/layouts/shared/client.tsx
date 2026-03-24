@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "fumadocs-core/framework";
-import Link from "fumadocs-core/link";
 import { useI18n } from "fumadocs-ui/contexts/i18n";
+import Link from "next/link";
 import type { ComponentProps, FC } from "react";
 import {
   type BaseLayoutProps,
@@ -22,6 +22,8 @@ import {
 } from "./slots/search-trigger";
 import { ThemeSwitch, type ThemeSwitchProps } from "./slots/theme-switch";
 
+const isExternalUrl = (url: string) => /^(https?:)?\/\//.test(url);
+
 export function LinkItem({
   ref,
   item,
@@ -31,15 +33,25 @@ export function LinkItem({
 }) {
   const pathname = usePathname();
   const active = isLinkItemActive(item, pathname);
+  const external = item.external || isExternalUrl(item.url);
+
+  if (external) {
+    return (
+      <Link
+        ref={ref}
+        href={item.url}
+        target="_blank"
+        rel="noreferrer noopener"
+        {...props}
+        data-active={active}
+      >
+        {props.children}
+      </Link>
+    );
+  }
 
   return (
-    <Link
-      ref={ref}
-      href={item.url}
-      external={item.external}
-      {...props}
-      data-active={active}
-    >
+    <Link ref={ref} href={item.url} {...props} data-active={active}>
       {props.children}
     </Link>
   );
@@ -92,8 +104,18 @@ export function baseSlots({ useProps }: { useProps: () => BaseSlotsProps }) {
     ...props
   }: ComponentProps<"a">) {
     const { url = defaultUrl, title } = useProps().nav ?? {};
+    const external = isExternalUrl(url);
 
     if (typeof title === "function") return title({ href: url, ...props });
+
+    if (external) {
+      return (
+        <Link href={url} target="_blank" rel="noreferrer noopener" {...props}>
+          {title}
+        </Link>
+      );
+    }
+
     return (
       <Link href={url} {...props}>
         {title}

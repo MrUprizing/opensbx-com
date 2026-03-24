@@ -69,12 +69,12 @@ export const IconClaudeCode = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
     fill="#FFFFFF"
-    fill-rule="evenodd"
-    clip-rule="evenodd"
+    fillRule="evenodd"
+    clipRule="evenodd"
   >
     <title>Claude Code</title>
     <path
-      clip-rule="evenodd"
+      clipRule="evenodd"
       d="M20.998 10.949H24v3.102h-3v3.028h-1.487V20H18v-2.921h-1.487V20H15v-2.921H9V20H7.488v-2.921H6V20H4.487v-2.921H3V14.05H0V10.95h3V5h17.998v5.949zM6 10.949h1.488V8.102H6v2.847zm10.51 0H18V8.102h-1.49v2.847z"
     ></path>
   </svg>
@@ -125,8 +125,8 @@ export const IconAstro = (props: SVGProps<SVGSVGElement>) => (
         y2="84.9468"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#D83333"></stop>
-        <stop offset="1" stop-color="#F041FF"></stop>
+        <stop stopColor="#D83333"></stop>
+        <stop offset="1" stopColor="#F041FF"></stop>
       </linearGradient>
     </defs>
   </svg>
@@ -148,8 +148,8 @@ export const IconPython = (props: SVGProps<SVGSVGElement>) => (
         x2="79.67%"
         y2="78.01%"
       >
-        <stop offset="0%" stop-color="#387EB8"></stop>
-        <stop offset="100%" stop-color="#366994"></stop>
+        <stop offset="0%" stopColor="#387EB8"></stop>
+        <stop offset="100%" stopColor="#366994"></stop>
       </linearGradient>
       <linearGradient
         id="python-yellow"
@@ -158,8 +158,8 @@ export const IconPython = (props: SVGProps<SVGSVGElement>) => (
         x2="90.43%"
         y2="88.01%"
       >
-        <stop offset="0%" stop-color="#FFE052"></stop>
-        <stop offset="100%" stop-color="#FFC331"></stop>
+        <stop offset="0%" stopColor="#FFE052"></stop>
+        <stop offset="100%" stopColor="#FFC331"></stop>
       </linearGradient>
     </defs>
     <path

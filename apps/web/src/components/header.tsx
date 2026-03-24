@@ -14,9 +14,9 @@ import { useMedia } from "@/hooks/use-media";
 import { cn } from "@/lib/utils";
 
 const menuItems = [
-  { name: "Features", href: "#link" },
+  { name: "Use case", href: "#link" },
   { name: "Pricing", href: "#link" },
-  { name: "Company", href: "#link" },
+  { name: "About", href: "/about" },
 ];
 
 export const HeroHeader = () => {
@@ -106,7 +106,13 @@ const NavItems = () => {
             variant="ghost"
             size="sm"
             className="w-full max-lg:h-12 max-lg:justify-start max-lg:text-lg"
-            render={<Link href={item.href} className="text-base" />}
+            render={
+              <Link
+                href={item.href}
+                transitionTypes={["slide-in"]}
+                className="text-base"
+              />
+            }
             nativeButton={false}
           >
             <span>{item.name}</span>

@@ -1,5 +1,4 @@
 import { Shield } from "lucide-react";
-import { Card } from "@/components/ui/card";
 import {
   IconClaude,
   IconDocker,
@@ -8,6 +7,7 @@ import {
   IconNodeJs,
   IconPython,
 } from "@/assets";
+import { Card } from "@/components/ui/card";
 
 export default function Features() {
   return (
