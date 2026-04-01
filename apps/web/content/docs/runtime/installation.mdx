@@ -1,0 +1,83 @@
+---
+title: Installation
+description: Prerequisites, quick install, Docker setup, and optional gVisor hardening.
+---
+
+## Prerequisites
+
+- Docker
+- Go (latest stable recommended)
+- Optional on Ubuntu: gVisor (`runsc`)
+
+## Quick Install (Recommended)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/MrUprizing/opensbx/main/scripts/install.sh | bash
+```
+
+Run locally:
+
+```bash
+opensbx
+```
+
+Health check:
+
+```bash
+curl http://127.0.0.1:8080/v1/health
+```
+
+## Docker Setup
+
+### macOS
+
+```bash
+docker --version
+docker info
+```
+
+### Ubuntu
+
+```bash
+sudo apt update
+sudo apt install -y docker.io
+sudo systemctl enable docker
+sudo systemctl start docker
+docker --version
+```
+
+## Optional Hardening: gVisor on Ubuntu
+
+Install gVisor:
+
+```bash
+curl -fsSL https://gvisor.dev/archive.key | sudo gpg --dearmor -o /usr/share/keyrings/gvisor-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gvisor-archive-keyring.gpg] https://storage.googleapis.com/gvisor/releases release main" | sudo tee /etc/apt/sources.list.d/gvisor.list > /dev/null
+sudo apt update
+sudo apt install -y runsc
+```
+
+Configure Docker to use `runsc` as default runtime:
+
+```bash
+RUNSC_PATH=$(command -v runsc)
+sudo mkdir -p /etc/docker
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+  "default-runtime": "runsc",
+  "runtimes": {
+    "runsc": {
+      "path": "${RUNSC_PATH}"
+    }
+  }
+}
+EOF
+sudo systemctl restart docker
+```
+
+Validate:
+
+```bash
+docker info | grep "Default Runtime"
+docker run --rm hello-world
+```

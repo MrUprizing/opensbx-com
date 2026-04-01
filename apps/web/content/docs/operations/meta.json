@@ -1,0 +1,6 @@
+{
+  "title": "Operations",
+  "description": "Testing and releases",
+  "root": true,
+  "pages": ["testing", "releases"]
+}

@@ -14,6 +14,8 @@ export type PresetType =
   | "rotate"
   | "swing";
 
+type MotionElement = keyof React.JSX.IntrinsicElements & string;
+
 export type AnimatedGroupProps = {
   children: ReactNode;
   className?: string;
@@ -22,8 +24,8 @@ export type AnimatedGroupProps = {
     item?: Variants;
   };
   preset?: PresetType;
-  as?: React.ElementType;
-  asChild?: React.ElementType;
+  as?: MotionElement;
+  asChild?: MotionElement;
 };
 
 const defaultContainerVariants: Variants = {
@@ -114,14 +116,8 @@ function AnimatedGroup({
   const containerVariants = variants?.container || selectedVariants.container;
   const itemVariants = variants?.item || selectedVariants.item;
 
-  const MotionComponent = React.useMemo(
-    () => motion.create(as as keyof JSX.IntrinsicElements),
-    [as],
-  );
-  const MotionChild = React.useMemo(
-    () => motion.create(asChild as keyof JSX.IntrinsicElements),
-    [asChild],
-  );
+  const MotionComponent = React.useMemo(() => motion.create(as), [as]);
+  const MotionChild = React.useMemo(() => motion.create(asChild), [asChild]);
 
   return (
     <MotionComponent
@@ -130,8 +126,11 @@ function AnimatedGroup({
       variants={containerVariants}
       className={className}
     >
-      {React.Children.map(children, (child, index) => (
-        <MotionChild key={index} variants={itemVariants}>
+      {React.Children.toArray(children).map((child) => (
+        <MotionChild
+          key={React.isValidElement(child) ? child.key : null}
+          variants={itemVariants}
+        >
           {child}
         </MotionChild>
       ))}

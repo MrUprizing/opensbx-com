@@ -1,0 +1,6 @@
+{
+  "title": "Networking",
+  "description": "Proxy, domains, and MCP",
+  "root": true,
+  "pages": ["reverse-proxy-domains", "mcp"]
+}

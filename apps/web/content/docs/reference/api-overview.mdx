@@ -1,0 +1,67 @@
+---
+title: API Overview
+description: Endpoint groups, auth model, and key request/response schemas.
+---
+
+Base path: `/v1`
+
+## Authentication
+
+- Security scheme: `ApiKeyAuth` in `Authorization` header.
+- Expected header format: `Bearer {your-api-key}`.
+- Health endpoint is often left open for liveness checks.
+
+## System
+
+- `GET /health` - API + Docker daemon health status.
+
+## Images
+
+- `GET /images` - list local Docker images.
+- `GET /images/{id}` - inspect image details.
+- `POST /images/pull` - pull image from registry.
+- `DELETE /images/{id}?force=true|false` - remove local image.
+
+## Sandboxes
+
+- `GET /sandboxes` - list sandboxes.
+- `POST /sandboxes` - create sandbox.
+- `GET /sandboxes/{id}` - inspect sandbox.
+- `DELETE /sandboxes/{id}` - force delete sandbox.
+- `POST /sandboxes/{id}/start` - start stopped sandbox.
+- `POST /sandboxes/{id}/stop` - stop running sandbox.
+- `POST /sandboxes/{id}/restart` - restart sandbox.
+- `POST /sandboxes/{id}/pause` - pause sandbox.
+- `POST /sandboxes/{id}/resume` - resume sandbox.
+- `POST /sandboxes/{id}/renew-expiration` - reset sandbox timeout/TTL.
+- `GET /sandboxes/{id}/stats` - CPU/memory/pids snapshot.
+- `GET /sandboxes/{id}/network` - routing port and container-host map.
+
+## Commands
+
+- `GET /sandboxes/{id}/cmd` - list command executions.
+- `POST /sandboxes/{id}/cmd` - execute command (async by default).
+- `POST /sandboxes/{id}/cmd?wait=true` - blocking execution mode.
+- `GET /sandboxes/{id}/cmd/{cmdId}` - get command status.
+- `GET /sandboxes/{id}/cmd/{cmdId}?wait=true` - wait for completion.
+- `POST /sandboxes/{id}/cmd/{cmdId}/kill` - send POSIX signal.
+- `GET /sandboxes/{id}/cmd/{cmdId}/logs` - read stdout/stderr.
+- `GET /sandboxes/{id}/cmd/{cmdId}/logs?stream=true` - ND-JSON live logs.
+
+## Files
+
+- `GET /sandboxes/{id}/files?path=...` - read file content.
+- `PUT /sandboxes/{id}/files?path=...` - write or overwrite file content.
+- `DELETE /sandboxes/{id}/files?path=...` - delete file or directory recursively.
+- `GET /sandboxes/{id}/files/list?path=...` - list directory (`ls -la` style).
+
+## Key Schemas
+
+- `CreateSandboxRequest`: `image`, optional `ports`, `timeout`, `resources`, `env`.
+- `CreateSandboxResponse`: `id`, `name`, `ports`, optional `url`.
+- `ExecCommandRequest`: `command`, `args`, `cwd`, `env`.
+- `CommandDetail`: state, timestamps, metadata, exit code.
+- `CommandLogsResponse`: `stdout`, `stderr`, optional `exit_code`.
+- `ResourceLimits`: `memory` (MB), `cpus` (fractional).
+- `SandboxStats`: `cpu_percent`, `memory`, `pids`.
+- `ErrorResponse`: `code`, `message`.

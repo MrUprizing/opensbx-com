@@ -1,5 +1,14 @@
 {
-  "title": "Documentación",
-  "description": "Index",
-  "root": true
+  "title": "Documentation",
+  "description": "Opensbx docs",
+  "root": true,
+  "pages": [
+    "index",
+    "getting-started",
+    "runtime",
+    "networking",
+    "deployment",
+    "reference",
+    "operations"
+  ]
 }

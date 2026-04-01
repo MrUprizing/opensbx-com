@@ -1,8 +1,80 @@
 ---
-title: Documentación
-description: Página principal de la documentación
+title: Overview
+description: What Opensbx is, why it exists, and how it works.
 ---
 
-# Bienvenido a la Documentación
+# Opensbx
 
-Esta es la página principal de la documentación.
+Opensbx is a self-hosted, API-first sandbox runtime for executing untrusted or AI-generated code in isolated Docker environments.
+
+It is built for teams that want infrastructure control, predictable costs, and clear runtime boundaries.
+
+## Core Capabilities
+
+- Create disposable sandboxes from Docker images.
+- Execute commands and stream logs.
+- Read, write, list, and delete files inside sandboxes.
+- Expose sandbox services through generated subdomain URLs.
+- Apply resource and timeout limits.
+- Stop and delete sandboxes cleanly.
+
+## Why Teams Use Opensbx
+
+- **Self-hosted control:** run on your own servers and network.
+- **Lightweight architecture:** no Kubernetes control plane required.
+- **API-first workflows:** easy integration with apps, tools, and agents.
+- **AI-ready runtime:** designed for generated script and code execution.
+- **MCP support:** includes a `/v1/mcp` endpoint.
+- **Low lock-in:** you control images and operations.
+
+## Typical Use Cases
+
+- AI coding agents and tool execution.
+- Code execution products.
+- User-submitted script runners.
+- Disposable CI or test workloads.
+- Internal dev and prototyping environments.
+
+## Conceptual Flow
+
+1. Use an existing image like `node:22` or `python:3.12`.
+2. Create a sandbox with optional ports, env vars, timeout, and resource limits.
+3. Run commands and read logs via the API.
+4. Manage files and directories via the API.
+5. Access exposed services through generated subdomain URLs.
+6. Stop or delete the sandbox, or let timeout auto-stop it.
+
+## Next Steps
+
+<Cards>
+  <Card href="/docs/getting-started" title="Getting Started">
+    Quickstart flow and first sandbox execution.
+  </Card>
+  <Card href="/docs/runtime/installation" title="Runtime: Installation">
+    Prerequisites, Docker setup, and optional gVisor hardening.
+  </Card>
+  <Card href="/docs/runtime/configuration" title="Runtime: Configuration">
+    Environment variables, flags, defaults, and auth model.
+  </Card>
+  <Card href="/docs/networking/reverse-proxy-domains" title="Networking: Reverse Proxy and Domains">
+    Local and production subdomain routing.
+  </Card>
+  <Card href="/docs/networking/mcp" title="Networking: MCP">
+    MCP endpoint behavior and initialization checks.
+  </Card>
+  <Card href="/docs/deployment/cloudflare-tunnel" title="Deployment: Cloudflare Tunnel">
+    End-to-end production setup with wildcard routing.
+  </Card>
+  <Card href="/docs/reference/api-overview" title="Reference: API Overview">
+    Endpoint groups, auth model, and schema summary.
+  </Card>
+  <Card href="/docs/reference/swagger-openapi" title="Reference: Swagger and OpenAPI">
+    Generate and update OpenAPI docs.
+  </Card>
+  <Card href="/docs/operations/testing" title="Operations: Testing">
+    Unit and integration test workflows.
+  </Card>
+  <Card href="/docs/operations/releases" title="Operations: Releases">
+    Tag-based release flow and distribution.
+  </Card>
+</Cards>

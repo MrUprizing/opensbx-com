@@ -1,0 +1,6 @@
+{
+  "title": "Runtime",
+  "description": "Installation and runtime configuration",
+  "root": true,
+  "pages": ["installation", "configuration"]
+}

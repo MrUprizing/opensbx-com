@@ -1,0 +1,97 @@
+---
+title: Reverse Proxy and Domains
+description: Subdomain routing behavior for local and production environments.
+---
+
+Opensbx routes sandbox services through subdomains (for example `my-app.localhost`) instead of exposing raw Docker ports publicly.
+
+Container ports are bound to `127.0.0.1` only. Traffic should pass through the built-in reverse proxy.
+
+## Proxy Config
+
+| Env Variable | Flag | Default | Description |
+|--------------|------|---------|-------------|
+| `PROXY_ADDR` | `-proxy-addr` | `:80,:3000` | Comma-separated proxy listen addresses |
+| `BASE_DOMAIN` | `-base-domain` | `localhost` | Base domain for subdomain routing |
+
+Behavior details:
+
+- The first address in `PROXY_ADDR` is used to generate sandbox URLs.
+- If first address is `:80` or `:443`, generated URL omits port.
+- Otherwise generated URL includes the port.
+
+## Create Sandbox with Proxy URL
+
+```bash
+curl -X POST localhost:8080/v1/sandboxes \
+  -H "Content-Type: application/json" \
+  -d '{
+    "image": "node:22",
+    "ports": ["3000", "8080"]
+  }'
+```
+
+Example response:
+
+```json
+{
+  "id": "a1b2c3d4...",
+  "name": "eager-turing",
+  "ports": ["3000/tcp", "8080/tcp"],
+  "url": "http://eager-turing.localhost"
+}
+```
+
+If sandbox is created without `ports`, proxy URL is omitted.
+
+## Local Development
+
+Modern browsers resolve `*.localhost` to `127.0.0.1` (RFC 6761), so custom DNS is usually not needed.
+
+```bash
+go run ./cmd/api
+```
+
+- API: `localhost:8080`
+- Proxy: `*.localhost` on `80` and `3000`
+
+If you cannot bind port `80` without elevated privileges:
+
+```bash
+PROXY_ADDR=:3000 go run ./cmd/api
+```
+
+If wildcard localhost resolution fails, use `dnsmasq`:
+
+```bash
+brew install dnsmasq
+echo "address=/localhost/127.0.0.1" >> $(brew --prefix)/etc/dnsmasq.conf
+sudo brew services start dnsmasq
+sudo mkdir -p /etc/resolver
+echo "nameserver 127.0.0.1" | sudo tee /etc/resolver/localhost
+```
+
+## Production DNS Pattern
+
+Create a wildcard DNS record:
+
+```text
+*.sandbox.example.com  ->  A  ->  YOUR_SERVER_IP
+```
+
+Run example:
+
+```bash
+PROXY_ADDR=:80 \
+BASE_DOMAIN=sandbox.example.com \
+API_KEY=your-secret \
+go run ./cmd/api
+```
+
+Resulting URL format:
+
+```text
+http://<name>.sandbox.example.com
+```
+
+For HTTPS, terminate TLS in front of Opensbx using a wildcard certificate for `*.sandbox.example.com`.

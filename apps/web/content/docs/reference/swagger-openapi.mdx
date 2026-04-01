@@ -1,0 +1,40 @@
+---
+title: Swagger and OpenAPI
+description: Generate, update, and view Swagger docs for Opensbx.
+---
+
+Swagger documentation is generated from Go annotations using `swag`.
+
+## Install Generator
+
+```bash
+go install github.com/swaggo/swag/cmd/swag@latest
+```
+
+## Generate Docs
+
+```bash
+swag init -g ./cmd/api/main.go -o docs --parseDependency --parseInternal
+```
+
+Manual absolute-path variant:
+
+```bash
+/Users/uprizing/go/bin/swag init -g ./cmd/api/main.go -o docs --parseDependency --parseInternal
+```
+
+Regenerate after handler annotation changes (`@Summary`, `@Param`, `@Success`, etc.).
+
+## Generated Artifacts
+
+- `docs/docs.go`
+- `docs/swagger.json`
+- `docs/swagger.yaml`
+
+## Swagger UI
+
+With the API running:
+
+```text
+http://localhost:8080/swagger/index.html
+```

@@ -15,21 +15,20 @@ export default function Features() {
       <div className="mx-auto max-w-2xl px-6">
         <div>
           <h2 className="text-balance font-pixel-circle text-4xl ">
-            Powerful Features for Modern Teams
+            Sandbox Runtime Built for AI Teams
           </h2>
           <p className="text-muted-foreground mt-4 text-balance">
-            Everything you need to build, connect, and scale your integrations
-            effortlessly.
+            Execute untrusted code safely with isolated sandboxes, API-first
+            workflows, and production-ready controls.
           </p>
         </div>
         <div className="@xl:grid-cols-2 mt-12 grid gap-3 *:p-6">
           <Card variant="outline" className="row-span-2 grid grid-rows-subgrid">
             <div className="space-y-2">
-              <h3 className="text-foreground font-medium">
-                Seamless Integrations
-              </h3>
+              <h3 className="text-foreground font-medium">Polyglot Runtime</h3>
               <p className="text-muted-foreground text-sm">
-                Connect your favorite tools and services with just a few clicks.
+                Run Node.js, Python, Go, and framework workloads inside isolated
+                Docker sandboxes.
               </p>
             </div>
             <div
@@ -73,9 +72,10 @@ export default function Features() {
             className="row-span-2 grid grid-rows-subgrid overflow-hidden"
           >
             <div className="space-y-2">
-              <h3 className="text-foreground font-medium">Real-time Sync</h3>
+              <h3 className="text-foreground font-medium">Live Command Logs</h3>
               <p className="text-muted-foreground text-sm">
-                Keep your data synchronized across all platforms automatically.
+                Execute commands through the API and stream stdout and stderr in
+                real time.
               </p>
             </div>
             <div aria-hidden className="relative h-44 translate-y-6">
@@ -91,10 +91,10 @@ export default function Features() {
             className="row-span-2 grid grid-rows-subgrid overflow-hidden"
           >
             <div className="space-y-2">
-              <h3 className="text-foreground font-medium">Developer First</h3>
+              <h3 className="text-foreground font-medium">API-First Design</h3>
               <p className="text-muted-foreground mt-2 text-sm">
-                Built with developers in mind, featuring comprehensive APIs and
-                SDKs.
+                Manage sandboxes, files, networking, and command execution with
+                clear REST endpoints.
               </p>
             </div>
             <div
@@ -137,10 +137,10 @@ export default function Features() {
           </Card>
           <Card variant="outline" className="row-span-2 grid grid-rows-subgrid">
             <div className="space-y-2">
-              <h3 className="font-medium">Enterprise Ready</h3>
+              <h3 className="font-medium">Security by Default</h3>
               <p className="text-muted-foreground text-sm">
-                Scale confidently with enterprise-grade security and
-                reliability.
+                Apply CPU, memory, and timeout limits with optional API key auth
+                and gVisor hardening.
               </p>
             </div>
 

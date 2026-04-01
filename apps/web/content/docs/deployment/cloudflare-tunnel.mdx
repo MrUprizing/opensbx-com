@@ -1,0 +1,130 @@
+---
+title: Cloudflare Tunnel Deployment
+description: Deploy Opensbx with Cloudflare Tunnel for API and wildcard sandbox routing.
+---
+
+## Target Topology
+
+- API at `your-domain.com`
+- Sandboxes at `*.your-domain.com`
+
+Cloudflare handles TLS, and `cloudflared` forwards traffic to local Opensbx ports.
+
+## Fast Setup (macOS)
+
+### 1) Install cloudflared
+
+```bash
+brew install cloudflared
+cloudflared --version
+```
+
+### 2) Authenticate
+
+```bash
+cloudflared tunnel login
+```
+
+### 3) Create tunnel
+
+```bash
+cloudflared tunnel create opensbx-local
+```
+
+Save the returned `<TUNNEL_ID>`.
+
+### 4) Add DNS routes
+
+```bash
+cloudflared tunnel route dns opensbx-local your-domain.com
+cloudflared tunnel route dns opensbx-local '*.your-domain.com'
+```
+
+### 5) Create `~/.cloudflared/config.yml`
+
+```yaml
+tunnel: <TUNNEL_ID>
+credentials-file: /Users/<YOUR_USER>/.cloudflared/<TUNNEL_ID>.json
+
+ingress:
+  - hostname: your-domain.com
+    service: http://127.0.0.1:8080
+  - hostname: "*.your-domain.com"
+    service: http://127.0.0.1:3000
+  - service: http_status:404
+```
+
+`ingress` order matters: API route first, wildcard route second.
+
+### 6) Validate and run tunnel
+
+```bash
+cloudflared tunnel ingress validate
+cloudflared tunnel run opensbx-local
+```
+
+## Run Opensbx for Deployment
+
+Install binary:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/MrUprizing/opensbx/main/scripts/install.sh | bash
+```
+
+Run with domain configuration:
+
+```bash
+opensbx -addr :8080 -proxy-addr :3000 -base-domain your-domain.com
+```
+
+## Verify Deployment
+
+Health:
+
+```bash
+curl https://your-domain.com/v1/health
+```
+
+Create sandbox:
+
+```bash
+curl -X POST https://your-domain.com/v1/sandboxes \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer your-secret-key" \
+  -d '{"image":"nginx:alpine","ports":["80"]}'
+```
+
+Expected URL format:
+
+```text
+https://<sandbox-name>.your-domain.com
+```
+
+## Ubuntu VPS Notes
+
+Install cloudflared:
+
+```bash
+curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloudflare-main.gpg
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+sudo apt update
+sudo apt install -y cloudflared
+```
+
+Run as service:
+
+```bash
+sudo cloudflared service install
+sudo systemctl enable cloudflared
+sudo systemctl restart cloudflared
+sudo journalctl -u cloudflared --no-pager -n 50
+```
+
+Firewall guidance:
+
+```bash
+sudo ufw allow 22/tcp
+sudo ufw enable
+```
+
+Do not expose ports `8080` or `3000` publicly.

@@ -14,8 +14,8 @@ import { useMedia } from "@/hooks/use-media";
 import { cn } from "@/lib/utils";
 
 const menuItems = [
-  { name: "Use case", href: "#link" },
-  { name: "Pricing", href: "#link" },
+  { name: "Home", href: "/" },
+  { name: "Installation", href: "#link" },
   { name: "About", href: "/about" },
 ];
 

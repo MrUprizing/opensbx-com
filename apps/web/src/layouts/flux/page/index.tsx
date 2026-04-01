@@ -185,7 +185,7 @@ export function DocsDescription({
   return (
     <p
       {...props}
-      className={cn("mb-8 text-lg text-fd-muted-foreground", className)}
+      className={cn("mb-8 text-lg text-fd-muted-foreground font-mono", className)}
     >
       {children}
     </p>
@@ -198,7 +198,7 @@ export function DocsTitle({
   ...props
 }: ComponentProps<"h1">) {
   return (
-    <h1 {...props} className={cn("text-[1.75em] font-semibold", className)}>
+    <h1 {...props} className={cn("text-[1.75em] font-pixel-grid font-semibold", className)}>
       {children}
     </h1>
   );

@@ -1,5 +1,6 @@
 {
   "title": "Reference",
-  "description": "Guías y documentación técnica",
-  "root": true
+  "description": "API and OpenAPI reference",
+  "root": true,
+  "pages": ["api-overview", "swagger-openapi"]
 }

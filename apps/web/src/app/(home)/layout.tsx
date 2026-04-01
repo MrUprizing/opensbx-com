@@ -7,7 +7,7 @@ export default function DashboardLayout({
 }) {
   return (
     <>
-      <HeroHeader />
+      {/*<HeroHeader />*/}
       {children}
     </>
   );

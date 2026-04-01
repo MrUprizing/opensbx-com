@@ -1,13 +1,60 @@
 ---
-title: Hello World
-description: Your first document
+title: Getting Started
+description: Run Opensbx locally and execute your first sandbox workload.
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+This page gets you from zero to a working local runtime quickly.
 
-## What is Next?
+## 1) Install and Run
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
-</Cards>
+Install the latest binary:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/MrUprizing/opensbx/main/scripts/install.sh | bash
+```
+
+Run the server:
+
+```bash
+opensbx
+```
+
+By default:
+
+- API listens on `:8080`.
+- Proxy listens on `:80,:3000`.
+- Base domain is `localhost`.
+
+## 2) Verify Health
+
+```bash
+curl http://127.0.0.1:8080/v1/health
+```
+
+Expected result: API reports healthy status and Docker availability.
+
+## 3) Create a Sandbox
+
+```bash
+curl -X POST http://127.0.0.1:8080/v1/sandboxes \
+  -H "Content-Type: application/json" \
+  -d '{"image":"node:22","ports":["3000"],"timeout":900}'
+```
+
+The response includes a generated sandbox `id`, `name`, and optional `url` when ports are exposed.
+
+## 4) Run a Command
+
+```bash
+curl -X POST http://127.0.0.1:8080/v1/sandboxes/<sandbox-id>/cmd \
+  -H "Content-Type: application/json" \
+  -d '{"command":"node","args":["-v"]}'
+```
+
+Use the returned command ID to query status or logs.
+
+## 5) Recommended Next Reading
+
+- `/docs/runtime/installation`
+- `/docs/runtime/configuration`
+- `/docs/reference/api-overview`

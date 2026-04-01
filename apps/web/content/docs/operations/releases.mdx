@@ -1,0 +1,57 @@
+---
+title: Releases
+description: Release workflow, build targets, and installation options.
+---
+
+Releases are managed with GitHub Actions and GoReleaser.
+
+## Release Pipeline
+
+- Workflow: `.github/workflows/release.yml`
+- Trigger: tags starting with `v` (example: `v1.2.0`)
+- Tooling: `goreleaser/goreleaser-action` with `.goreleaser.yml`
+
+Build targets:
+
+- `linux/amd64`, `linux/arm64`
+- `macos/amd64`, `macos/arm64`
+- `windows/amd64`, `windows/arm64`
+
+Artifacts include platform archives and `checksums.txt`.
+
+## Create a Release
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+GitHub Actions creates the release and uploads binaries automatically.
+
+## Install Without Cloning
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/MrUprizing/opensbx/main/scripts/install.sh | bash
+```
+
+Optional installer environment variables:
+
+- `OPENSBX_VERSION` (example: `v1.0.0`)
+- `OPENSBX_INSTALL_DIR` (default `/usr/local/bin`)
+- `OPENSBX_REPO` (default `MrUprizing/opensbx`)
+
+Pinned-version install example:
+
+```bash
+OPENSBX_VERSION=v1.0.0 curl -fsSL https://raw.githubusercontent.com/MrUprizing/opensbx/main/scripts/install.sh | bash
+```
+
+Windows users can download `.zip` binaries from GitHub Releases.
+
+## Local Dry Run (No Publish)
+
+```bash
+goreleaser release --snapshot --clean
+```
+
+Artifacts are generated in `dist/`.

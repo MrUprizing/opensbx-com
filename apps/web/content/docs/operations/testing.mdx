@@ -1,0 +1,34 @@
+---
+title: Testing
+description: Unit tests, integration tests, and CI behavior.
+---
+
+## Prerequisites
+
+- Go installed
+- Docker running (required for integration tests)
+
+## Unit Tests
+
+```bash
+go test ./...
+```
+
+## Integration Tests
+
+```bash
+go test -tags=integration ./... -run '^TestIntegration'
+```
+
+Notes:
+
+- Integration suite uses Docker.
+- Test image is currently hardcoded to `node:25-alpine`.
+- If the image is missing locally, tests try auto-pull.
+- If Docker is unavailable, integration tests are skipped.
+
+## CI Behavior
+
+- Unit tests run on pushes to `main`.
+- Unit tests run on every pull request.
+- Integration tests run only on pushes to `main`.

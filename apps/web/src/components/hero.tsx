@@ -177,7 +177,7 @@ export default function HeroSection() {
                     }
                     nativeButton={false}
                   >
-                    <span className="text-nowrap">Start Building</span>
+                    <span className="text-nowrap">Start</span>
                     <ChevronRight className="opacity-50" />
                   </Button>
                 </AnimatedGroup>

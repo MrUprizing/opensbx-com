@@ -1,0 +1,36 @@
+---
+title: Configuration
+description: Environment variables, CLI flags, and runtime defaults.
+---
+
+## Runtime Defaults
+
+- Memory default: **1 GB** (max **8 GB**)
+- CPU default: **1.0 vCPU** (max **4.0**)
+- Timeout default: **900 seconds** (15 minutes)
+
+## Environment Variables and Flags
+
+| Variable | Flag | Default | Description |
+|----------|------|---------|-------------|
+| `ADDR` | `-addr` | `:8080` | HTTP API listen address |
+| `PROXY_ADDR` | `-proxy-addr` | `:80,:3000` | Proxy listen addresses (comma-separated) |
+| `BASE_DOMAIN` | `-base-domain` | `localhost` | Base domain for subdomain routing |
+| `LOG_FILE` | `-log-file` | `opensbx.log` | Log file path for API and MCP metadata |
+| `API_KEY` | none | empty (auth disabled) | Bearer token for API auth |
+
+## Authentication Model
+
+When `API_KEY` is set, requests must include:
+
+```text
+Authorization: Bearer <your-api-key>
+```
+
+The health endpoint is commonly used for liveness checks.
+
+## Example Production-Like Run
+
+```bash
+opensbx -addr :8080 -proxy-addr :3000 -base-domain your-domain.com
+```
