@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Github } from "lucide-react";
 import type { Variants } from "motion/react";
 import Link from "next/link";
 import {
@@ -16,6 +16,7 @@ import { AnimatedGroup } from "@/components/ui/animated-group";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { TextEffect } from "@/components/ui/text-effect";
+import { gitConfig } from "@/lib/layout.shared";
 import { Spotlight } from "./ui/spotlight";
 
 const transitionVariants: { item: Variants } = {
@@ -96,6 +97,8 @@ const iconCards = [
 ] as const;
 
 export default function HeroSection() {
+  const githubUrl = `https://github.com/${gitConfig.user}/${gitConfig.repo}`;
+
   return (
     <>
       <main className="overflow-hidden">
@@ -168,7 +171,7 @@ export default function HeroSection() {
                     },
                     ...transitionVariants,
                   }}
-                  className="mt-6 flex justify-center"
+                  className="mt-6 flex justify-center gap-3"
                 >
                   <Button
                     className="pr-1.5"
@@ -179,6 +182,21 @@ export default function HeroSection() {
                   >
                     <span className="text-nowrap">Start</span>
                     <ChevronRight className="opacity-50" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    render={
+                      <Link
+                        transitionTypes={["slide-in"]}
+                        href={githubUrl}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      />
+                    }
+                    nativeButton={false}
+                  >
+                    <Github className="opacity-70" />
+                    <span className="text-nowrap">GitHub</span>
                   </Button>
                 </AnimatedGroup>
               </div>
