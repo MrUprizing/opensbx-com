@@ -10,6 +10,14 @@ import {
 } from "geist/font/pixel";
 import { GeistSans } from "geist/font/sans";
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Opensbx',
+  description: 'Opensbx is an API-first sandbox runtime for untrusted or AI-generated code. I',
+}
+
+
 export default function Layout({ children }: LayoutProps<"/">) {
   return (
     <html
